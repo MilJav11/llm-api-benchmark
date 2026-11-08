@@ -1,0 +1,3 @@
+# Dev-only dependencies for the offline test workflow.
+# Runtime deps (pytest, pytest-html, ollama client) come from requirements.txt.
+pytest>=8.0.0
