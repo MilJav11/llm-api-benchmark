@@ -1,10 +1,7 @@
 name: LLM Benchmark CI
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   benchmark:
@@ -42,9 +39,9 @@ jobs:
         run: |
           # Run all test files in the directory and combine them into one report
           pytest -v -s --html=benchmark_report.html --self-contained-html test_local_benchmark.py test_llm_judge.py test_security.py test_rag_hallucinations.py
-        continue-on-error: true
 
       - name: Upload Test Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-html-report
