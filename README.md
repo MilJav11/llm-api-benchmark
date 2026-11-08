@@ -1,4 +1,4 @@
-[![LLM Benchmark CI](https://github.com/MilJav11/llm-api-benchmark/actions/workflows/main.yml/badge.svg)](https://github.com/MilJav11/llm-api-benchmark/actions/workflows/main.yml)
+[![Offline Tests](https://github.com/MilJav11/llm-api-benchmark/actions/workflows/offline-tests.yml/badge.svg)](https://github.com/MilJav11/llm-api-benchmark/actions/workflows/offline-tests.yml)
 
 # LLM Local API Benchmark 🚀
 
@@ -44,6 +44,21 @@ Results were produced locally with the models listed above; CI uses a smaller mo
 2. **Run the tests:** `pytest -v`
 
 Tests are skipped automatically when Ollama is not running or no target models are installed.
+
+### Offline tests (no Ollama needed)
+
+The offline test suite runs without Ollama and without network access:
+
+```bash
+pytest tests_offline -q -rxX
+```
+
+The live Ollama benchmark workflow is run manually: [Live Ollama Benchmark](https://github.com/MilJav11/llm-api-benchmark/actions/workflows/main.yml). Its results are non-deterministic and do not gate merges.
+
+### Known limitations
+
+- Benchmark expected-value matching is substring-based (e.g. "18" matches expected "8").
+- LLM-judge verdict matching is substring-based (e.g. "NOT A PASS" counts as a pass).
 
 ## 📁 Automated Reporting
 
