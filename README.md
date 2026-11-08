@@ -8,6 +8,8 @@ Professional automated QA framework for benchmarking local LLMs (Llama 3.2, Phi-
 
 This project goes beyond simple ping tests. It measures **inference latency**, **instruction-following accuracy**, **security guardrails**, and **RAG context adherence** on local hardware. By separating test data (JSON) from test logic (Pytest), it provides a scalable, 4-layered testing architecture.
 
+![Sample benchmark report: pytest-html results table with per-test duration and pass/fail status](docs/assets/benchmark-report.png)
+
 ### Baseline Benchmark Results (Sample Run)
 
 _Note: LLMs are non-deterministic by nature. These results represent a baseline snapshot; individual CI runs may vary due to model flakiness._
@@ -45,7 +47,7 @@ Tests are skipped automatically when Ollama is not running or no target models a
 
 ## 📁 Automated Reporting
 
-The CI/CD pipeline generates automated reports in two formats for easy analysis:
+CI generates the HTML report (uploaded as a workflow artifact); the files below are sample reports from a local run, kept in `docs/`:
 
 - 🌐 **[HTML Report (Interactive)](./docs/sample-benchmark-report.html)** - Detailed view with duration, LLM judge reasoning, security breaches, and hallucination logs.
 - 📄 **[PDF Report (Static)](./docs/sample-benchmark-report.pdf)** - Print-ready version of the test results.
