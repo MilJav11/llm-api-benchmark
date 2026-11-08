@@ -1,4 +1,4 @@
-[![LLM Benchmark CI](https://github.com/MilJav11/LLM-API-Benchmark/actions/workflows/main.yml/badge.svg)](https://github.com/MilJav11/LLM-API-Benchmark/actions/workflows/main.yml)
+[![LLM Benchmark CI](https://github.com/MilJav11/llm-api-benchmark/actions/workflows/main.yml/badge.svg)](https://github.com/MilJav11/llm-api-benchmark/actions/workflows/main.yml)
 
 # LLM Local API Benchmark 🚀
 
@@ -7,6 +7,8 @@ Professional automated QA framework for benchmarking local LLMs (Llama 3.2, Phi-
 ## 📊 Overview
 
 This project goes beyond simple ping tests. It measures **inference latency**, **instruction-following accuracy**, **security guardrails**, and **RAG context adherence** on local hardware. By separating test data (JSON) from test logic (Pytest), it provides a scalable, 4-layered testing architecture.
+
+![Sample benchmark report: pytest-html results table with per-test duration and pass/fail status](docs/assets/benchmark-report.png)
 
 ### Baseline Benchmark Results (Sample Run)
 
@@ -18,12 +20,37 @@ _Note: LLMs are non-deterministic by nature. These results represent a baseline 
 | **Phi-3:mini**    | ~19s      | ✅ Passed | High quality, good safety refusals.              |
 | **Qwen 2.5:0.5b** | **~4s**   | ❌ Failed | Fast, but highly vulnerable to prompt injection. |
 
+Results were produced locally with the models listed above; CI uses a smaller model set (`llama3.2:1b` and `qwen2.5:0.5b`).
+
+## 🛠️ Setup
+
+1. **Install Ollama:** Follow the instructions at [ollama.com](https://ollama.com) (or run `curl -fsSL https://ollama.com/install.sh | sh`).
+2. **Pull the models used by the tests:**
+   ```bash
+   ollama pull llama3.2:1b
+   ollama pull phi3:mini
+   ollama pull qwen2.5:0.5b
+   ```
+3. **Create a Python virtual environment and install dependencies:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+## ▶️ Running the Benchmark
+
+1. **Start Ollama:** run `ollama serve` (or just start the Ollama app).
+2. **Run the tests:** `pytest -v`
+
+Tests are skipped automatically when Ollama is not running or no target models are installed.
+
 ## 📁 Automated Reporting
 
-The CI/CD pipeline generates automated reports in two formats for easy analysis:
+CI generates the HTML report (uploaded as a workflow artifact); the files below are sample reports from a local run, kept in `docs/`:
 
-- 🌐 **[HTML Report (Interactive)](./benchmark_report.html)** - Detailed view with duration, LLM judge reasoning, security breaches, and hallucination logs.
-- 📄 **[PDF Report (Static)](./benchmark_report.pdf)** - Print-ready version of the test results.
+- 🌐 **[HTML Report (Interactive)](./docs/sample-benchmark-report.html)** - Detailed view with duration, LLM judge reasoning, security breaches, and hallucination logs.
+- 📄 **[PDF Report (Static)](./docs/sample-benchmark-report.pdf)** - Print-ready version of the test results.
 
 ## 🛠️ Tech Stack & Dependencies
 
