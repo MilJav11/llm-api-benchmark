@@ -92,6 +92,7 @@ The framework is divided into 4 independent modules, testing different aspects o
 - **Strict Constraints:** Small parameter models (like Qwen 2.5:0.5b) struggle with strict "one-word" constraints, highlighting the fragility of standard "exact-match" assertions in AI testing.
 - **Security Vulnerabilities:** Small models generally lack sufficient attention mechanisms to resist prompt injection attacks ("ignore previous instructions").
 - **LLM Non-Determinism (Flakiness):** During repeated CI/CD runs, identical prompts sometimes yielded different results due to the probabilistic nature of LLMs (e.g., hallucinating forbidden concepts randomly). This proves the necessity of robust, multi-layered automated testing and semantic evaluation over rigid text matching.
+- **Runs on modest hardware:** An earlier single-model version of this framework ([ai-llm-qa-automation](https://github.com/MilJav11/ai-llm-qa-automation)) ran on a laptop without a GPU (Intel i5-7200U, 8 GB RAM): Llama 3.2 1B answered in ~0.8 s on average, the first request took ~8 s while the model loaded into RAM. AI testing doesn't require expensive GPU clusters.
 
 ## 🚀 Scalability: Adding New Models
 
